@@ -2,14 +2,12 @@
 task :check_versions do
   puts "## Check program versions"
   ["firefox", "mysql", "psql", "ruby", "gem", "bundle", "Xvfb"].each do |bin|
+    version = `#{bin} --version 2>/dev/null || apt-show-versions #{bin.downcase} 2>/dev/null || echo "not found :("`.sub(/\n(.+)/, ", \1")
+    path = `which #{bin} 2>/dev/null || echo "not found :("`
+
     puts "  # Testing #{bin}"
-    begin
-      version = `#{bin} --version`.sub(/\n(.+)/, ", \1")
-    rescue
-      version = `apt-show-versions #{bin.downcase}`
-    end
     puts "  -- version: #{version}"
-    puts "  -- path:    " + `which #{bin}`
+    puts "  -- path:    #{path}"
     puts ""
   end
 end
