@@ -38,6 +38,19 @@ task :list_processes do
   puts ""
 end
 
-task :travis => [:hw_info, :environment, :limits, :check_versions, :list_processes] do
+task :swap do
+  puts "## Setting up swapfile"
+  puts `sudo dd if=/dev/zero of=swapfile bs=1M count=64`
+  puts `sudo mkswap swapfile`
+  puts `sudo swapon swapfile`
+end
+
+task :free do
+  puts "## Show memory consumption"
+  puts `free`
+  puts ""
+end
+
+task :travis => [:hw_info, :swap, :free, :environment, :limits, :check_versions, :list_processes] do
   puts "## Done"
 end
