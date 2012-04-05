@@ -26,12 +26,18 @@ task :environment do
   puts ""
 end
 
+task :limits do
+  puts "## Limits"
+  puts `ulimit -a`
+  puts ""
+end
+
 task :list_processes do
   puts "## Listing processes"
   puts `ps ux`
   puts ""
 end
 
-task :travis => [:hw_info, :environment, :check_versions, :list_processes] do
+task :travis => [:hw_info, :environment, :limits, :check_versions, :list_processes] do
   puts "## Done"
 end
