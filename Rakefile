@@ -43,6 +43,8 @@ task :swap do
   puts `sudo dd if=/dev/zero of=swapfile bs=1M count=64`
   puts `sudo mkswap swapfile`
   puts `sudo swapon swapfile`
+  puts `cat /proc/sys/vm/swappiness`
+  puts ""
 end
 
 task :free do
