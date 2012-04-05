@@ -12,11 +12,26 @@ task :check_versions do
   end
 end
 
+task :hw_info do
+  puts "## Hardware info"
+  puts `cat /proc/cpuinfo`
+  puts ""
+  puts `cat /proc/meminfo`
+  puts ""
+end
+
+task :environment do
+  puts "## Environment"
+  puts `env`
+  puts ""
+end
+
 task :list_processes do
   puts "## Listing processes"
   puts `ps ux`
+  puts ""
 end
 
-task :travis => [:check_versions, :list_processes] do
+task :travis => [:hw_info, :environment, :check_versions, :list_processes] do
   puts "## Done"
 end
