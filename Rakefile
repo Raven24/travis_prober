@@ -28,7 +28,7 @@ end
 
 task :limits do
   puts "## Limits"
-  puts `ulimit -a`
+  puts `bash -c "ulimit -a"`
   puts ""
 end
 
