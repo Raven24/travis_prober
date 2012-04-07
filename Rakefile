@@ -43,7 +43,7 @@ task :swap do
   puts `sudo dd if=/dev/zero of=swapfile bs=1M count=64`
   puts `sudo mkswap swapfile`
   puts `sudo swapon swapfile`
-  puts `cat /proc/sys/vm/swappiness`
+  puts "swappiness: " + `cat /proc/sys/vm/swappiness`
   puts ""
 end
 
@@ -53,6 +53,12 @@ task :free do
   puts ""
 end
 
-task :travis => [:hw_info, :swap, :free, :environment, :limits, :check_versions, :list_processes] do
+task :hd_space do
+  puts "## Show available disc space"
+  puts `df -h`
+  puts ""
+end
+
+task :travis => [:hw_info, :swap, :free, :hd_space, :environment, :limits, :check_versions, :list_processes] do
   puts "## Done"
 end
